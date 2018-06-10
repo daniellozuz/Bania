@@ -1,4 +1,4 @@
-function [result] = control_sim(tau, u, T, t0, x0, h, x_set, ro, x_delta)
+function [result, x, t] = control_sim(tau, u, T, t0, x0, h, x_set, ro, x_delta)
 
     x = x0;
     t = 0;
