@@ -1,11 +1,11 @@
-function [ x,t ] = rk4_simul(x0, steps, tau1, tau2, t_end, ro)
+function [ quality, x, t ] = rk4_simul(x0, steps, tau1, tau2, t_end, x_set, ro)
     %switch state moments
     u1_sw_vec = [tau1; t_end];
     u2_sw_vec = [tau2; t_end];
     x = x0';
     t0 = 0;
     t = [0];
-    u1min = -0.001;
+    u1min = -0.1;
     u1max = -u1min;
     u2min = u1min;
     u2max = u1max;
@@ -56,5 +56,5 @@ function [ x,t ] = rk4_simul(x0, steps, tau1, tau2, t_end, ro)
             break;
         end        
     end
+    quality = J(t(end), x(end,:), x_set, ro);
 end
-
