@@ -16,8 +16,8 @@ ro = 1500;
 [RK4_h, ~, ~] = rk4_simul(x0, steps, tau1, tau2, t_end, x_set, ro);
 %quality = RK4_multicontrol(tau_u, @dxdt, T, t0, x0, h, x_set, ro)
 A = [eye(4); -eye(4)];
-b = [2; 2; 2; 2; 0; 0; 0; 0];
-res = fmincon(@(x0)rk4_simul_wrapper(x0, steps, tau1, tau2, t_end, x_set, ro), tau1, A, b);
+b = [0.5; 1; 1.5; 2; 0; -0.5; -1; -1.5];
+res = fmincon(@(tau1)rk4_simul_wrapper(x0, steps, tau1, tau2, t_end, x_set, ro), tau1, A, b);
 % tau = res;
 [~, x, t] = rk4_simul(x0, steps, tau1, tau2, t_end, x_set, ro);
 figure(1);
