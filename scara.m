@@ -8,15 +8,16 @@ u_min = -u_max;
 x0 = [0.11; 0.75; 1; 0]; %initial position of first and second robot arm
 x_set = [1; 1; 0; 0]; %end position
 steps = 100; %steps per switch
-t_end = 4.83; %end time
+t_end = 2; %end time
 tau1 = [0.5; 1; 1.5; 2]; %switch time for first arm
 tau2 = [0.5; 1; 1.5; 2];
 ro = 1500;
 
 [RK4_h, ~, ~] = rk4_simul(x0, steps, tau1, tau2, t_end, x_set, ro);
 %quality = RK4_multicontrol(tau_u, @dxdt, T, t0, x0, h, x_set, ro)
-A = -eye(20) + diag(ones(1,19), -1);
-res = fmincon(@rk4_simul_wrapper(x0, steps, tau1, tau2, t_end, x_set, ro), tau1, A, zeros(1,20), [], [], lb, ub);
+A = [eye(4); -eye(4)];
+b = [2; 2; 2; 2; 0; 0; 0; 0];
+res = fmincon(@(x0)rk4_simul_wrapper(x0, steps, tau1, tau2, t_end, x_set, ro), tau1, A, b);
 % tau = res;
 [~, x, t] = rk4_simul(x0, steps, tau1, tau2, t_end, x_set, ro);
 figure(1);
