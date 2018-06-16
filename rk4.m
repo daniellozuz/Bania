@@ -1,4 +1,4 @@
-function [t, x] = rk4(x0, u, T, dt)
+function [x,t] = rk4(x0, u, T, dt)
     %% initial values
     t = 0:dt:T;
     steps = length(t);
