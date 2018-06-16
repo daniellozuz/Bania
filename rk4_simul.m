@@ -20,7 +20,7 @@ function [ quality, x, t ] = rk4_simul(x0, steps, tau, u, t_end, x_set, ro)
        n  = ceil(T*steps);
        dt = T/n;
        
-       [x_temp, t_temp] = rk4(new_x0, u(:,i), T, dt);
+       [x_temp, t_temp] = rk4(x0, u(:,i), T, dt);
        t_temp = t_temp + tau(i);
        
        x = [x; x_temp(2:end,:)];
