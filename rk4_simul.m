@@ -71,5 +71,5 @@ function [ quality, x, t ] = rk4_simul(x0, steps, tau, u, t_end, x_set, ro)
 %         end        
 %     end
     x(end,:)
-    quality = J(t(end), x(end,:), x_set, ro);
+    quality = J(t(end), x(end,:), x_set, ro, tau);
 end

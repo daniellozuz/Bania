@@ -2,7 +2,7 @@ function result = f(x, u)
 
 %% parametry
 I = [1, 1];
-m = [10, 10];
+m = [10, 0];
 d = [1, 1];
 xc = [0.5, 0.5];
 yc = [0, 0];
